@@ -1,7 +1,14 @@
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 20%));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 18%));
     gap: 10px;
+}
+
+#newBook {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    background-color: bisque;
+    border-radius: 10px;
 }
 
 .card {
@@ -14,4 +21,12 @@
     background-color: teal;
     padding: 12px;
     font-size: 2rem;
+}
+
+.deleteButton {
+    margin-top: 10px;
+    background-color: bisque;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    align-self: flex-end;
 }
