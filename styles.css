@@ -1,3 +1,7 @@
+body {
+    background-color: #e2f3d9;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 18%));
@@ -14,19 +18,46 @@
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: teal;
+    background-color: #c4ffed;
     padding: 12px;
     font-size: 2rem;
 }
 
-.deleteButton {
+.deleteButton,
+.readButton,
+.submit {
     margin-top: 10px;
     background-color: bisque;
     font-size: 1.2rem;
     border-radius: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
     align-self: flex-end;
+    justify-self: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #ffd6ca;
+    padding: 12px;
+    font-size: 2rem;
+}
+
+textarea {
+    font-size: 1.2rem;
+    height: 25px;
+    resize: none;
 }
