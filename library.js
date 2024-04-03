@@ -75,46 +75,107 @@ function addBook() {
     const container = document.getElementById("container");
     const inputForm = document.createElement("form");
 
+    // error fields
+    const authorError = document.createElement("div");
+    authorError.classList.add("error");
+
+    const titleError = document.createElement("div");
+    titleError.classList.add("error");
+
+    const pageError = document.createElement("div");
+    pageError.classList.add("error");
+
+    // author
     const inputAuthorText = document.createElement("div");
     inputAuthorText.innerText = "Author: ";
     const inputAuthor = document.createElement("textarea");
+    inputAuthor.classList.add("inputAuthor");
+    inputAuthor.required = true;
 
+    inputAuthor.addEventListener("input", () => {
+        if (inputAuthor.validity.valueMissing) {
+            authorError.textContent = "Author required";
+            authorError.classList.add("active");
+            inputAuthor.classList.add("invalid");
+        } else {
+            authorError.textContent = "";
+            inputAuthor.classList.remove("invalid");
+            authorError.classList.remove("active");
+        }
+    });
+
+    // title
     const inputTitleText = document.createElement("div");
     inputTitleText.innerText = "Title: ";
     const inputTitle = document.createElement("textarea");
+    inputTitle.classList.add("inputTitle");
+    inputTitle.required = true;
 
+    inputTitle.addEventListener("input", () => {
+        if (inputTitle.validity.valueMissing) {
+            titleError.textContent = "Title required";
+            titleError.classList.add("active");
+            inputTitle.classList.add("invalid");
+        } else {
+            titleError.textContent = "";
+            inputTitle.classList.remove("invalid");
+            titleError.classList.remove("active");
+        }
+    });
+
+    // page number
     const inputPagesText = document.createElement("div");
     inputPagesText.innerText = "Number of pages: ";
     const inputPages = document.createElement("textarea");
+    inputPages.classList.add("inputTitle");
+    inputPages.required = true;
 
+    inputPages.addEventListener("input", () => {
+        if (inputPages.validity.valueMissing) {
+            pageError.textContent = "Page number required";
+            pageError.classList.add("active");
+            inputPages.classList.add("invalid");
+        } else {
+            pageError.textContent = "";
+            inputPages.classList.remove("invalid");
+            pageError.classList.remove("active");
+        }
+    });
+
+    // submit button
     const submit = document.createElement("button");
     submit.classList.add("submit");
     submit.innerText = "Submit";
 
     inputForm.appendChild(inputAuthorText);
     inputForm.appendChild(inputAuthor);
+    inputForm.appendChild(authorError);
     inputForm.appendChild(inputTitleText);
     inputForm.appendChild(inputTitle);
+    inputForm.appendChild(titleError);
     inputForm.appendChild(inputPagesText);
     inputForm.appendChild(inputPages);
+    inputForm.appendChild(pageError);
     inputForm.appendChild(submit);
 
     container.appendChild(inputForm);
 
-    /*const author = prompt("Enter author:");
-    const title = prompt("Enter title:");
-    const pages = prompt("Enter page number:");*/
-    submit.onclick = function() {
-        if (isNaN(inputPages.value) || inputAuthor.value == "" || inputTitle.value == "" || inputPages.value == "") {
-            clearAllCards();
-            displayCards(myLibrary);
-            return;
-        } else {
-            const toAdd = new Book(inputAuthor.value, inputTitle.value, inputPages.value, false);
-            myLibrary.push(toAdd);
+        submit.onclick = function() {
+            if (inputAuthor.validity.valid && inputTitle.validity.valid && inputPages.validity.valid) {
+                if (isNaN(inputPages.value) || inputAuthor.value == "" || inputTitle.value == "" || inputPages.value == "") {
+                    clearAllCards();
+                    displayCards(myLibrary);
+                    return;
+                } else {
+                    const toAdd = new Book(inputAuthor.value, inputTitle.value, inputPages.value, false);
+                    myLibrary.push(toAdd);
+                }
+                clearAllCards();
+                displayCards(myLibrary);
+            } else {
+                alert("All fields must be filled out!");
         }
-        clearAllCards();
-        displayCards(myLibrary);
+    
     }
 }
 
